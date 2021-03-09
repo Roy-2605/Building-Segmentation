@@ -1,0 +1,103 @@
+batch_size: 3
+data_specs:
+  channels: 3
+  data_workers: null
+  dtype: null
+  height: 512
+  image_type: zscore
+  is_categorical: false
+  label_type: mask
+  mask_channels: 1
+  rescale: false
+  rescale_maxima: auto
+  rescale_minima: auto
+  val_holdout_frac: 0.2
+  width: 512
+infer: true
+inference:
+  output_dir: inference_out/
+  window_step_size_x: null
+  window_step_size_y: null
+inference_augmentation:
+  augmentations:
+    DropChannel:
+      axis: 2
+      idx: 3
+      p: 1.0
+    Normalize:
+      max_pixel_value: 255
+      mean:
+      - 0.3959587732610617
+      - 0.39155417494023464
+      - 0.32595118817059693
+      p: 1
+      std:
+      - 0.16544281517983278
+      - 0.15463466401385273
+      - 0.151699126453735
+  p: 1.0
+inference_data_csv: config/df_test.csv
+model_name: xdxd_spacenet4
+model_path: checkpoints/xdxd.pth
+nn_framework: torch
+pretrained: true
+train: true
+training:
+  callbacks:
+    model_checkpoint:
+      filepath: checkpoints/final-xdxd_best.pth
+      monitor: val_loss
+  checkpoint_frequency: 10
+  epochs: 3
+  loss:
+    bcewithlogits: null
+    jaccard: null
+  loss_weights:
+    bcewithlogits: 10
+    jaccard: 2.5
+  lr: 1e-4
+  metrics:
+    training: null
+    validation: null
+  model_dest_path: checkpoints/xdxd.pth
+  opt_args: null
+  optimizer: AdamW
+  steps_per_epoch: null
+  verbose: true
+training_augmentation:
+  augmentations:
+    DropChannel:
+      axis: 2
+      idx: 3
+    Normalize:
+      max_pixel_value: 255
+      mean:
+      - 0.23327122950086407
+      - 0.1879069674248789
+      - 0.1294915610668706
+      p: 1
+      std:
+      - 0.17512539051120904
+      - 0.14080119001788802
+      - 0.10620433812175252
+  p: 1.0
+  shuffle: true
+training_data_csv: config/df_train.csv
+validation_augmentation:
+  augmentations:
+    DropChannel:
+      axis: 2
+      idx: 3
+    Normalize:
+      max_pixel_value: 255
+      mean:
+      - 0.3959587732610617
+      - 0.39155417494023464
+      - 0.32595118817059693
+      p: 1
+      std:
+      - 0.16544281517983278
+      - 0.15463466401385273
+      - 0.151699126453735
+  p: 1.0
+validation_data_csv: null
